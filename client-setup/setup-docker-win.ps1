@@ -1,6 +1,9 @@
 param(
     [Parameter(Mandatory)]
-    [String]$dockerHost
+    [String]$dockerHost,
+
+    [Parameter]
+    [String]$force
 )
 
 #  check if docker cli is insalled
@@ -16,11 +19,13 @@ if ((Get-Command "docker.exe" -ErrorAction SilentlyContinue) -eq $null)
    [System.Environment]::SetEnvironmentVariable('PATH', $envPath, [System.EnvironmentVariableTarget]::User)
 }
 
-if (([System.Environment]::GetEnvironmentVariable('DOCKER_HOST', [System.EnvironmentVariableTarget]::User)) -eq $null)
+if (([System.Environment]::GetEnvironmentVariable('DOCKER_HOST', [System.EnvironmentVariableTarget]::User)) -eq $null -OR $force  -eq "force")
 {
     [System.Environment]::SetEnvironmentVariable('DOCKER_HOST', $dockerHost, [System.EnvironmentVariableTarget]::User)
 }
 else
 {
     Write-Host "WARNING! DOCKER_HOST is already set!"
+    Write-Host "\nUsage:"
+    Write-Host "source setup-docker-linux.sh DOCKER_HOST [force]"
 }
