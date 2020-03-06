@@ -8,12 +8,13 @@ services:
     ports:
       - "80:80"
 
+  # Hint: On which port the container is listening?
   result:
     image: dockersamples/examplevotingapp_result:latest
     networks:
       - back-end-subnet
     ports:
-      - "8080:80"
+      - "8080:8080"
 
   # Hint: What network is going to be attached to the worker service?
   worker:
