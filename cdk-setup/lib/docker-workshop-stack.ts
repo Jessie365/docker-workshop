@@ -23,12 +23,14 @@ export class DockerWorkshopStack extends cdk.Stack {
       description: 'Security group that allows incomming connections from Accedia IP addresses',
       securityGroupName: 'Allow Accedia Access'
     });
+    // Accedia
     securityGroup.addIngressRule(ec2.Peer.ipv4('92.247.21.34/32'), ec2.Port.allTraffic());
     securityGroup.addIngressRule(ec2.Peer.ipv4('92.247.21.35/32'), ec2.Port.allTraffic());
     securityGroup.addIngressRule(ec2.Peer.ipv4('212.73.143.178/32'), ec2.Port.allTraffic());
-    securityGroup.addIngressRule(ec2.Peer.ipv4('0.0.0.0/0'), ec2.Port.tcp(80));
-    securityGroup.addIngressRule(ec2.Peer.ipv4('0.0.0.0/0'), ec2.Port.tcp(2375));
-    securityGroup.addIngressRule(ec2.Peer.ipv4('0.0.0.0/0'), ec2.Port.tcpRange(8000, 8999));
+    // Tsvetan
+    securityGroup.addIngressRule(ec2.Peer.ipv4('93.152.139.216/32'), ec2.Port.tcp(80));
+    // Emi
+    securityGroup.addIngressRule(ec2.Peer.ipv4('93.152.141.235/32'), ec2.Port.tcp(2375));
 
 
     const participants = this.getParticipants();
