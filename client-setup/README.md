@@ -1,7 +1,10 @@
 # Linux install
-```source setup-docker-linux.sh {IP_ADDRESS} [force]```
+```source setup-docker-linux.sh {IP_ADDRESS}:2375 [force]```
 
 # Windows install
-```.\setup-docker-win.ps1 {IP_ADDRESS} [force]```
+- Open PowerShell
+- Navigate to docker-workshop\client-setup
+- Execute ```.\setup-docker-win.ps1 {IP_ADDRESS}:2375 [force]```
 
 # Mac install
+```setup-docker-linux.sh {IP_ADDRESS}:2375 [force]```
