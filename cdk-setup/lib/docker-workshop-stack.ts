@@ -28,9 +28,9 @@ export class DockerWorkshopStack extends cdk.Stack {
     securityGroup.addIngressRule(ec2.Peer.ipv4('92.247.21.35/32'), ec2.Port.allTraffic());
     securityGroup.addIngressRule(ec2.Peer.ipv4('212.73.143.178/32'), ec2.Port.allTraffic());
     // Tsvetan
-    securityGroup.addIngressRule(ec2.Peer.ipv4('93.152.139.216/32'), ec2.Port.tcp(80));
+    securityGroup.addIngressRule(ec2.Peer.ipv4('93.152.139.216/32'), ec2.Port.allTraffic());
     // Emi
-    securityGroup.addIngressRule(ec2.Peer.ipv4('93.152.141.235/32'), ec2.Port.tcp(2375));
+    securityGroup.addIngressRule(ec2.Peer.ipv4('93.152.141.235/32'), ec2.Port.allTraffic());
 
 
     const participants = this.getParticipants();
