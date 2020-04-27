@@ -1,0 +1,45 @@
+# kubectl autoscale deployment hpa-deployment --cpu-percent=50 --min=1 --max=10
+# echo "while true; do wget -q -O- http://hpa-service.default.svc.cluster.local ; done" > loops.sh
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hpa-deployment
+  labels:
+    k8s-app: hpa-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: hpa-demo
+  template:
+    metadata:
+      labels:
+        k8s-app: hpa-demo
+    spec:      
+      containers:
+      - name: hpa-demo-web
+        image: k8s.gcr.io/hpa-example
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: main-port
+          containerPort: 80
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 200m
+          limits:
+            cpu: 500m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hpa-service
+spec:
+  type: NodePort
+  selector:
+    k8s-app: hpa-demo
+  ports:
+    - port: 80
+      nodePort: 30088
+---
